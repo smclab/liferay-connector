@@ -1,0 +1,21 @@
+{
+  "name": "liferay-core-connector",
+  "version": "0.1.0",
+  "description": "A connection library for Liferay",
+  "main": "index.js",
+  "scripts": {
+    "test": "grunt test:node"
+  },
+  "author": "",
+  "license": "LGPL-2.1",
+  "dependencies": {
+    "superagent": "~0.16.0",
+    "bluebird": "~1.0.3",
+    "btoa": "~1.1.1"
+  },
+  "devDependencies": {
+    "should": "~3.1.2",
+    "grunt-mocha-test": "~0.9.0",
+    "grunt": "~0.4.2"
+  }
+}
