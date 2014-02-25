@@ -1,6 +1,13 @@
 var should = require('should');
 
-var liferay = require('..');
+var liferay;
+
+try {
+  liferay = require('liferay-core-connector');
+}
+catch (e) {
+  liferay = require('..');
+}
 
 var TIMEOUT = 10e3;
 
