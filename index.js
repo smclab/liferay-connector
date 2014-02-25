@@ -1,3 +1,11 @@
+
+// Move to titaniumifier!
+global.setTimeout = (function (setTimeout) {
+  return function _setTimeout(fn, timeout) {
+    return setTimeout(fn, timeout);
+  };
+})(global.setTimeout);
+
 var Promise = require('bluebird');
 
 var liferay = exports;
