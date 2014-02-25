@@ -1,0 +1,12 @@
+{
+  "name": "fake-titanium-app",
+  "private": true,
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "ti-mocha": "~0.1.1"
+  }
+}
