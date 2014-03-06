@@ -24,4 +24,4 @@ liferay.authenticate = function (portalURL, auth) {
   return liferay.identify(portalURL, auth).then(function (connector) {
     return connector.authenticate(portalURL, auth);
   });
-}
+};
