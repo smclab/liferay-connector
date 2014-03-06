@@ -12,7 +12,8 @@
   "dependencies": {
     "superagent": "~0.16.0",
     "bluebird": "~1.0.3",
-    "btoa": "~1.1.1"
+    "btoa": "~1.1.1",
+    "ti-superagent": "~0.2.0"
   },
   "titanium": {
     "superagent": "ti-superagent"
