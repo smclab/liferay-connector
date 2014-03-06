@@ -1,5 +1,8 @@
 
 // Move to titaniumifier!
+process.execPath || (process.execPath = '/path/to/node');
+
+// Move to titaniumifier!
 global.setTimeout = (function (setTimeout) {
   return function _setTimeout(fn, timeout) {
     return setTimeout(fn, timeout);
