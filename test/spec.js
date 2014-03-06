@@ -16,9 +16,21 @@ var TIMEOUT = 10e3;
 
 var PORTAL_URL = config.PORTAL_URL;
 var AUTH = config.AUTH;
+var WRONG_AUTH = config.WRONG_AUTH;
 
 var connector;
 var connection;
+
+function wrapDone(done, fn) {
+  return function () {
+    try {
+      fn.apply(this, arguments);
+    }
+    catch (e) {
+      done(e);
+    }
+  };
+}
 
 describe("The global connector", function () {
 
@@ -58,6 +70,15 @@ describe("The given connector", function () {
       connection = conn;
       done();
     }, done);
+  });
+
+  it("should not authenticate with wrong credentials", function (done) {
+    connector.authenticate(PORTAL_URL, WRONG_AUTH).done(function (conn) {
+      done(new Error("The portal authenticated with wrong credentials!"));
+    }, wrapDone(done, function (err) {
+      err.should.be.an.instanceOf(liferay.errors.Unauthorized);
+      done();
+    }));
   });
 
   testConnectionQuality(1);

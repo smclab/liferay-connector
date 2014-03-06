@@ -6,3 +6,7 @@ exports.AUTH = {
   password: 'test'
 };
 
+exports.WRONG_AUTH = {
+  login: 'i-do-not-exists@liferay.com',
+  password: 'wrong' + Math.random()
+};
