@@ -4,3 +4,4 @@ test/fake-titanium-app/build
 test/fake-titanium-app/modules
 test/fake-titanium-app/Resources/ti-mocha.js
 test/fake-titanium-app/Resources/spec.js
+test/fake-titanium-app/Resources/config.js
