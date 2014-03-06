@@ -1,21 +1,21 @@
 var should = require('should');
 
 var liferay;
+var config;
 
 try {
   liferay = require('liferay-core-connector');
+  config = require('config');
 }
 catch (e) {
   liferay = require('..');
+  config = require('./fake-titanium-app/Resources/config');
 }
 
 var TIMEOUT = 10e3;
 
-var PORTAL_URL = 'http://localhost:8080';
-var AUTH = {
-  login: 'test@liferay.com',
-  password: 'test'
-};
+var PORTAL_URL = config.PORTAL_URL;
+var AUTH = config.AUTH;
 
 var connector;
 var connection;

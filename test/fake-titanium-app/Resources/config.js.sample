@@ -1,0 +1,8 @@
+
+exports.PORTAL_URL = 'http://localhost:8080';
+
+exports.AUTH = {
+  login: 'test@liferay.com',
+  password: 'test'
+};
+
