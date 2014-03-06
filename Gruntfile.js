@@ -72,6 +72,6 @@ module.exports = function (grunt) {
   grunt.registerTask('ios', [ 'clean', 'build:titanium', 'test:ios' ]);
   grunt.registerTask('droid', [ 'clean', 'build:titanium', 'test:droid' ]);
 
-	grunt.registerTask('default', [ 'test:node' ]);
+  grunt.registerTask('default', [ 'test:node' ]);
 
 };
