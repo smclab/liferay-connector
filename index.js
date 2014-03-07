@@ -23,8 +23,8 @@ liferay.connectors = [
   liferay.v61, liferay.v62
 ];
 
-liferay.authenticate = function (portalURL, auth) {
+liferay.authenticate = function (portalURL, auth, callback) {
   return liferay.identify(portalURL, auth).then(function (connector) {
     return connector.authenticate(portalURL, auth);
-  });
+  }).nodeify(callback);
 };
