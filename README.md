@@ -4,6 +4,18 @@ Liferay Connector
 This module, available for Node.js and Titanium SDK, wraps the Liferay JSON WS into an easier to use (and easier to test!) API.
 
 
+Installation
+------------
+
+With **npm** you can easily install it with
+
+    npm install --save liferay-connector
+
+If you’re working on a **Titanium SDK** project then head over the [releases page][rp] to download the latest packaged module.
+
+[rp]: https://github.com/smclab/liferay-connector/releases
+
+
 Usage
 -----
 
