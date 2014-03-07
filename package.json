@@ -2,13 +2,25 @@
   "name": "liferay-connector",
   "guid": "b74f4463-69a6-20ae-0ef0-3033a20889de",
   "version": "0.1.0",
-  "description": "A connection library for Liferay",
+  "description": "Liferay JSON WS wrapper for Node and Titanium SDK",
+  "author": {
+    "name": "Pier Paolo Ramon",
+    "email": "pierpaolo.ramon@smc.it",
+    "url": "https://github.com/yuchi"
+  },
+  "license": "LGPL-2.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/smclab/liferay-connector.git"
+  },
+  "engines": {
+    "titaniumsdk": ">= 3.2.0.GA",
+    "node": ">= 0.8.0"
+  },
   "main": "index.js",
   "scripts": {
     "test": "grunt test:node"
   },
-  "author": "",
-  "license": "LGPL-2.1",
   "dependencies": {
     "superagent": "~0.16.0",
     "bluebird": "~1.0.3",
