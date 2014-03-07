@@ -1,5 +1,5 @@
 {
-  "name": "liferay-core-connector",
+  "name": "liferay-connector",
   "guid": "b74f4463-69a6-20ae-0ef0-3033a20889de",
   "version": "0.1.0",
   "description": "A connection library for Liferay",
