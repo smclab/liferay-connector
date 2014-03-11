@@ -1,15 +1,15 @@
 module.exports = function (grunt) {
 
-	grunt.initConfig({
+  grunt.initConfig({
 
     pkg: grunt.file.readJSON('package.json'),
 
-		mochaTest: {
-			options: {
-				reporter: 'spec'
-			},
-			src: [ 'test/*.js' ]
-		},
+    mochaTest: {
+      options: {
+        reporter: 'spec'
+      },
+      src: [ 'test/*.js' ]
+    },
 
     clean: {
       "modules": [ 'test/fake-titanium-app/modules' ],
@@ -47,15 +47,15 @@ module.exports = function (grunt) {
       }
     }
 
-	});
+  });
 
   grunt.loadNpmTasks('grunt-contrib-clean');
-	grunt.loadNpmTasks('grunt-mocha-test')
-	grunt.loadNpmTasks('grunt-titanium')
-	grunt.loadNpmTasks('grunt-titaniumifier')
+  grunt.loadNpmTasks('grunt-mocha-test')
+  grunt.loadNpmTasks('grunt-titanium')
+  grunt.loadNpmTasks('grunt-titaniumifier')
   grunt.loadNpmTasks('grunt-zip');
 
-	grunt.registerTask('test:node', [ 'mochaTest' ]);
+  grunt.registerTask('test:node', [ 'mochaTest' ]);
 
   grunt.registerTask('setup-spec', function () {
     grunt.file.copy('./test/spec.js', './test/fake-titanium-app/Resources/spec.js', {
