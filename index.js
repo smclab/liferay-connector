@@ -13,6 +13,8 @@ var Promise = require('bluebird');
 
 var liferay = exports;
 
+liferay.Promise = Promise;
+
 liferay.errors = require('./lib/errors');
 liferay.identify = require('./lib/identify');
 
