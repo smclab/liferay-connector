@@ -43,7 +43,7 @@ describe("The global connector", function () {
     }, done);
   });
 
-  /*it("sould throw at unauthorized access", function (done) {
+  /*it("should throw at unauthorized access", function (done) {
     liferay.identify(PORTAL_URL)
     .catch(liferay.errors.Unauthorized, done.bind(null, null))
     .done(function (res) {
