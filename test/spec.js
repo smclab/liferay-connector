@@ -4,7 +4,7 @@ var liferay;
 var config;
 
 try {
-  liferay = require('liferay-core-connector');
+  liferay = require('liferay-connector');
   config = require('config');
 }
 catch (e) {
