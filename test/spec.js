@@ -115,4 +115,30 @@ function testConnectionQuality(count) {
   });
 }
 
-describe("The given connection", function () {});
+describe("Error assimilation", function () {
+  it("should not get an MBMessage by a random id", function (done) {
+    connection.invoke({
+      "/mbmessage/get-message": {
+        messageId: 99999999
+      }
+    })
+    .done(function (message) {
+      done(new Error("Got a message with random id"));
+    }, wrapDone(done, function (err) {
+      err.should.be.an.instanceOf(liferay.errors.NotFound);
+      done();
+    }));
+  });
+
+  it("should understand wrong services", function (done) {
+    connection.invoke({
+      "/i-do-not-exists/neither-i": {}
+    })
+    .done(function () {
+      done(new Error("Resolved an un-existent service"));
+    }, wrapDone(done, function (err) {
+      err.should.be.an.instanceOf(liferay.errors.BadRequest);
+      done();
+    }));
+  });
+});
