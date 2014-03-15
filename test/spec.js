@@ -52,8 +52,9 @@ describe("The given connector", function () {
   it("should not authenticate with wrong credentials", function () {
     return connector.authenticate(PORTAL_URL, WRONG_AUTH).then(function () {
       throw new Error("The portal authenticated with wrong credentials!");
-    }, function (err) {
-      err.should.be.an.instanceOf(liferay.errors.Unauthorized);
+    })
+    .catch(liferay.errors.Unauthorized, function (err) {
+      return null;
     });
   });
 
@@ -99,8 +100,9 @@ describe("Error assimilation", function () {
     })
     .then(function (message) {
       throw new Error("Got a message with random id");
-    }, function (err) {
-      err.should.be.an.instanceOf(liferay.errors.NotFound);
+    })
+    .catch(liferay.errors.NotFound, function (err) {
+      return null;
     });
   });
 
@@ -110,8 +112,9 @@ describe("Error assimilation", function () {
     })
     .then(function () {
       throw new Error("Resolved an un-existent service");
-    }, function (err) {
-      err.should.be.an.instanceOf(liferay.errors.BadRequest);
+    })
+    .catch(liferay.errors.BadRequest, function (err) {
+      return null;
     });
   });
 });
