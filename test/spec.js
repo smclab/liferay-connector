@@ -12,6 +12,8 @@ catch (e) {
   config = require('./fake-titanium-app/Resources/config');
 }
 
+var Promise = liferay.Promise;
+
 var TIMEOUT = 10e3;
 
 var PORTAL_URL = config.PORTAL_URL;
@@ -21,39 +23,15 @@ var WRONG_AUTH = config.WRONG_AUTH;
 var connector;
 var connection;
 
-function wrapDone(done, fn) {
-  return function () {
-    try {
-      fn.apply(this, arguments);
-    }
-    catch (e) {
-      done(e);
-    }
-  };
-}
-
 describe("The global connector", function () {
 
   this.timeout(TIMEOUT);
 
-  it("should be able to indentify a Liferay (≥6.1)", function (done) {
-    liferay.identify(PORTAL_URL, AUTH).done(function (conn) {
+  it("should be able to indentify a Liferay (≥6.1)", function () {
+    return liferay.identify(PORTAL_URL, AUTH).then(function (conn) {
       connector = conn;
-      done();
-    }, done);
-  });
-
-  /*it("should throw at unauthorized access", function (done) {
-    liferay.identify(PORTAL_URL)
-    .catch(liferay.errors.Unauthorized, done.bind(null, null))
-    .done(function (res) {
-      done(new Error("Identification passed without an authentication"));
-    }, function (err) {
-      if (err instanceof liferay.errors.Unauthorized) {
-        done();
-      }
     });
-  });*/
+  });
 
 });
 
@@ -65,20 +43,18 @@ describe("The given connector", function () {
     connector.should.have.a.property('authenticate');
   });
 
-  it("should authenticate correctly", function (done) {
-    connector.authenticate(PORTAL_URL, AUTH).done(function (conn) {
+  it("should authenticate correctly", function () {
+    return connector.authenticate(PORTAL_URL, AUTH).then(function (conn) {
       connection = conn;
-      done();
-    }, done);
+    });
   });
 
-  it("should not authenticate with wrong credentials", function (done) {
-    connector.authenticate(PORTAL_URL, WRONG_AUTH).done(function (conn) {
-      done(new Error("The portal authenticated with wrong credentials!"));
-    }, wrapDone(done, function (err) {
+  it("should not authenticate with wrong credentials", function () {
+    return connector.authenticate(PORTAL_URL, WRONG_AUTH).then(function () {
+      throw new Error("The portal authenticated with wrong credentials!");
+    }, function (err) {
       err.should.be.an.instanceOf(liferay.errors.Unauthorized);
-      done();
-    }));
+    });
   });
 
   testConnectionQuality(1);
@@ -88,11 +64,10 @@ describe("Automatic authentication", function () {
 
   this.timeout(TIMEOUT);
 
-  it("should authenticate without an identification", function (done) {
-    liferay.authenticate(PORTAL_URL, AUTH).done(function (conn) {
+  it("should authenticate without an identification", function () {
+    return liferay.authenticate(PORTAL_URL, AUTH).then(function (conn) {
       connection = conn;
-      done();
-    }, done);
+    });
   });
 
   testConnectionQuality(2);
@@ -116,29 +91,27 @@ function testConnectionQuality(count) {
 }
 
 describe("Error assimilation", function () {
-  it("should not get an MBMessage by a random id", function (done) {
-    connection.invoke({
+  it("should not get an MBMessage by a random id", function () {
+    return connection.invoke({
       "/mbmessage/get-message": {
         messageId: 99999999
       }
     })
-    .done(function (message) {
-      done(new Error("Got a message with random id"));
-    }, wrapDone(done, function (err) {
+    .then(function (message) {
+      throw new Error("Got a message with random id");
+    }, function (err) {
       err.should.be.an.instanceOf(liferay.errors.NotFound);
-      done();
-    }));
+    });
   });
 
-  it("should understand wrong services", function (done) {
-    connection.invoke({
+  it("should understand wrong services", function () {
+    return connection.invoke({
       "/i-do-not-exists/neither-i": {}
     })
-    .done(function () {
-      done(new Error("Resolved an un-existent service"));
-    }, wrapDone(done, function (err) {
+    .then(function () {
+      throw new Error("Resolved an un-existent service");
+    }, function (err) {
       err.should.be.an.instanceOf(liferay.errors.BadRequest);
-      done();
-    }));
+    });
   });
 });
