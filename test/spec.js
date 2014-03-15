@@ -111,7 +111,7 @@ describe("Error assimilation", function () {
       "/i-do-not-exists/neither-i": {}
     })
     .then(function () {
-      throw new Error("Resolved an un-existent service");
+      throw new Error("Resolved an non-existent service");
     })
     .catch(liferay.errors.BadRequest, function (err) {
       return null;
