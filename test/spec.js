@@ -22,6 +22,7 @@ var WRONG_AUTH = config.WRONG_AUTH;
 
 var connector;
 var connection;
+var userGroup;
 
 describe("The global connector", function () {
 
@@ -115,6 +116,89 @@ describe("Error assimilation", function () {
     })
     .catch(liferay.errors.BadRequest, function (err) {
       return null;
+    });
+  });
+});
+
+describe("Blogs services", function () {
+  it("(with the user group)", function () {
+    var candidates = connection.sites.filter(function (group) {
+      return group.friendlyURL === '/' + connection.user.screenName;
+    });
+
+    candidates.should.have.length(1);
+
+    userGroup = candidates[0];
+
+    userGroup.should.have.a.property('groupId');
+    userGroup.should.have.a.property('companyId');
+  });
+
+  var entry;
+
+  it("should be able to create (valid) entries", function () {
+    var now = new Date();
+    return connection.invoke({
+      "/blogsentry/add-entry": {
+        title: 'title-' + Math.random(),
+        description: 'description-' + Math.random(),
+        content: 'content-' + Math.random(),
+        displayDateMonth: now.getMonth(),
+        displayDateDay: now.getDate(),
+        displayDateYear: now.getFullYear(),
+        displayDateHour: now.getHours(),
+        displayDateMinute: now.getMinutes(),
+        allowPingbacks: false,
+        allowTrackbacks: false,
+        trackbacks: [],
+        smallImage: false,
+        smallImageUrl: null,
+        // Issue #5
+        /*smallImageURL: null,*/
+        smallImageFileName: null,
+        smallImageInputStream: null,
+        '+serviceContext': 'com.liferay.portal.service.ServiceContext',
+        'serviceContext.companyId': userGroup.companyId,
+        'serviceContext.scopeGroupId': userGroup.groupId,
+        'serviceContext.addGuestPermissions': true,
+        'serviceContext.addGroupPermissions': true
+        // Issue #4
+        /*serviceContext: {
+          companyId: userGroup.groupId,
+          scopeGroupId: userGroup.companyId,
+          addGuestPermissions: true,
+          addGroupPermissions: true
+        }*/
+      }
+    })
+    .then(function (result) {
+      entry = result;
+
+      entry.should.have.a.property('entryId');
+      entry.should.have.a.property('title');
+      entry.should.have.a.property('description');
+      entry.should.have.a.property('content');
+
+      entry.entryId.should.be.a.Number;
+    });
+  });
+
+  it("should get that same entry", function () {
+    return connection.invoke({
+      "/blogsentry/get-entry": {
+        entryId: entry.entryId
+      }
+    })
+    .then(function (result) {
+      result.should.eql(entry);
+    });
+  });
+
+  it("should delete a fresh entry", function () {
+    return connection.invoke({
+      "/blogsentry/delete-entry": {
+        entryId: entry.entryId
+      }
     });
   });
 });
