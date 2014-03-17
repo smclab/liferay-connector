@@ -4264,7 +4264,7 @@ Runnable.prototype.fullTitle = function(){
  */
 
 Runnable.prototype.clearTimeout = function(){
-  clearTimeout(this.timer);
+  if (typeof this.timer === 'number') clearTimeout(this.timer);
 };
 
 /**
