@@ -33,7 +33,6 @@ describe("The global connector", function () {
       connector = conn;
     });
   });
-
 });
 
 describe("The given connector", function () {
