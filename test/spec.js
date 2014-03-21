@@ -9,7 +9,7 @@ try {
 }
 catch (e) {
   liferay = require('..');
-  config = require('./fake-titanium-app/Resources/config');
+  config = require('./config');
 }
 
 var Promise = liferay.Promise;

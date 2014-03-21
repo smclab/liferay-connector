@@ -58,11 +58,16 @@ module.exports = function (grunt) {
   grunt.registerTask('test:node', [ 'mochaTest' ]);
 
   grunt.registerTask('setup-spec', function () {
-    grunt.file.copy('./test/spec.js', './test/fake-titanium-app/Resources/spec.js', {
-      process: function (source) {
-        return "\n\n/* DO NOT MODIFY THIS FILE! Work on test/spec.js instead! */\n\n" + source;
-      }
+    grunt.file.copy('./test/config.js', './test/fake-titanium-app/Resources/config.js', {
+      process: banner
     });
+    grunt.file.copy('./test/spec.js', './test/fake-titanium-app/Resources/spec.js', {
+      process: banner
+    });
+
+    function banner(source) {
+      return "\n\n/* DO NOT MODIFY THIS FILE! Work on test/spec.js instead! */\n\n" + source;
+    }
   });
 
   grunt.registerTask('build:titanium', [ 'titaniumifier:module' ]);
