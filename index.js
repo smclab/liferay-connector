@@ -23,6 +23,7 @@ liferay.Promise = Promise;
 
 liferay.errors = require('./lib/errors');
 liferay.identify = require('./lib/identify');
+liferay.camelcase = require('./lib/camelcase');
 
 liferay.v61 = require('./lib/connectors/liferay61');
 liferay.v62 = require('./lib/connectors/liferay62');

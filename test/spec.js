@@ -24,6 +24,58 @@ var connector;
 var connection;
 var userGroup;
 
+describe("The camelcase#normalize util", function () {
+  var known = {
+    // Known to be preserved
+    "somethingUrl": "somethingUrl",
+    // Known to be mangled
+    "classPK": "classPk",
+    "feedURL": "feedUrl",
+    "entryURL": "entryUrl",
+    "homeURL": "homeUrl",
+    "smallImageURL": "smallImageUrl",
+    "newClassPK": "newClassPk",
+    "contentURL": "contentUrl",
+    "friendlyURL": "friendlyUrl",
+    "articleURL": "articleUrl",
+    "displayDateGT": "displayDateGt",
+    "displayDateLT": "displayDateLt",
+    "friendlyURLMap": "friendlyUrlMap",
+    "inUseSSL": "inUseSsl",
+    "outUseSSL": "outUseSsl",
+    "permissionClassPK": "permissionClassPk",
+    "inputStreamOVPs": "inputStreamOvPs",
+    "pageURL": "pageUrl",
+    "downloadPageURL": "downloadPageUrl",
+    "directDownloadURL": "directDownloadUrl",
+    "testDirectDownloadURL": "testDirectDownloadUrl",
+    "mediumImageURL": "mediumImageUrl",
+    "largeImageURL": "largeImageUrl",
+    "overrideClassPK": "overrideClassPk",
+    "attachmentURLPrefix": "attachmentUrlPrefix"
+  };
+
+  it("should mangle correctly the known affected parameter names", function () {
+    Object.keys(known).forEach(function (from) {
+      var to = known[ from ];
+      liferay.camelcase.normalize(from).should.eql(to);
+    });
+  });
+
+  it("should be idempotent", function () {
+    Object.keys(known).forEach(function (from) {
+      var to = known[ from ];
+      liferay.camelcase.normalize(to).should.eql(to);
+    });
+  });
+});
+
+describe("The camelcase#normalizeParameter util", function () {
+  it("should preserve inner parameters", function () {
+    liferay.camelcase.normalizeParameter("fullURL.fullURL").should.eql("fullUrl.fullURL");
+  });
+});
+
 describe("The global connector", function () {
 
   this.timeout(TIMEOUT);
@@ -273,6 +325,18 @@ if (config.TEST_COMPANION_PLUGIN) describe("Parameter names (companion)", functi
       "/connector-companion-portlet/tests/parameter-names-test": {
         somethingUrl: 'abc',
         somethingOvPs: 'def'
+      }
+    })
+    .then(function (ok) {
+      ok.should.be.eql(true);
+    });
+  });
+
+  it("should support not-mangled parameters", function () {
+    return connection.invoke({
+      "/connector-companion-portlet/tests/parameter-names-test": {
+        somethingURL: 'abc',
+        somethingOVPs: 'def'
       }
     })
     .then(function (ok) {
