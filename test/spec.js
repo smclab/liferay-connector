@@ -76,6 +76,12 @@ describe("The camelcase#normalizeParameter util", function () {
   });
 });
 
+describe("The Connector#mangleCamelCase util", function () {
+  // TODO
+  it("should preserve nested service calls");
+  it("should preserve inner parameters");
+});
+
 describe("The global connector", function () {
 
   this.timeout(TIMEOUT);
