@@ -8,6 +8,12 @@ global.setTimeout = (function (setTimeout) {
     return setTimeout(fn, timeout);
   };
 })(global.setTimeout);
+global.clearTimeout = (function (clearTimeout) {
+  return function _clearTimeout(timeoutId) {
+    if (typeof timeoutId === 'number') return clearTimeout(timeoutId);
+    else return undefined;
+  };
+})(global.clearTimeout);
 
 var Promise = require('bluebird');
 
