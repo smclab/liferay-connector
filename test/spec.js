@@ -201,3 +201,82 @@ describe("Blogs services", function () {
     });
   });
 });
+
+if (config.TEST_COMPANION_PLUGIN) describe("Smoke tests (companion)", function () {
+  it("should reach the companion (1/2)", function () {
+    return connection.invoke({
+      "/connector-companion-portlet/tests/smoke-test": {
+        input: true
+      }
+    })
+    .then(function (output) {
+      output.should.be.eql(false);
+    });
+  });
+
+  it("should reach the companion (2/2)", function () {
+    return connection.invoke({
+      "/connector-companion-portlet/tests/smoke-test": {
+        input: false
+      }
+    })
+    .then(function (output) {
+      output.should.be.eql(true);
+    });
+  });
+});
+
+if (config.TEST_COMPANION_PLUGIN) describe("Return types (companion)", function () {
+  it("should support JSONObject", function () {
+    return connection.invoke({
+      "/connector-companion-portlet/tests/json-object-test": {
+        property: 'answer',
+        value: '42'
+      }
+    })
+    .then(function (jsonObject) {
+      jsonObject.should.have.a.property("answer");
+      jsonObject.answer.should.be.eql("42");
+    });
+  });
+
+  it("should support User", function () {
+    return connection.invoke({
+      "/connector-companion-portlet/tests/current-user": {}
+    })
+    .then(function (user) {
+      user.should.have.a.property('userId');
+    })
+  });
+});
+
+if (config.TEST_COMPANION_PLUGIN) describe("Service Context (companion)", function () {
+  it("should support ServiceContext parameters", function () {
+    return connection.invoke({
+      "/connector-companion-portlet/tests/service-context-smoke-test": {
+        currentUrl: 'nonsense',
+        scopeGroupId: userGroup.groupId,
+        '+serviceContext': 'com.liferay.portal.service.ServiceContext',
+        'serviceContext.scopeGroupId': userGroup.groupId,
+        'serviceContext.currentURL': 'nonsense'
+      }
+    })
+    .then(function (ok) {
+      ok.should.be.eql(true);
+    });
+  });
+});
+
+if (config.TEST_COMPANION_PLUGIN) describe("Parameter names (companion)", function () {
+  it("should support manually mangled parameters", function () {
+    return connection.invoke({
+      "/connector-companion-portlet/tests/parameter-names-test": {
+        somethingUrl: 'abc',
+        somethingOvPs: 'def'
+      }
+    })
+    .then(function (ok) {
+      ok.should.be.eql(true);
+    });
+  });
+});
