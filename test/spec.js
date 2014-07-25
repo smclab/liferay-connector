@@ -77,9 +77,41 @@ describe("The camelcase.normalizeParameter util", function () {
 });
 
 describe("The Connector#mangleCamelCase util", function () {
-  // TODO
-  it("should preserve nested service calls");
-  it("should preserve inner parameters");
+  it("should preserve nested service calls", function () {
+    liferay.v61.prototype.mangleCamelCase({
+      "$user = /user/get-user-by-id": {
+        "fullURL": 123,
+        "userId": 123,
+        "$contact = /contact/get-contact-by-id": {
+          "fullURL": 123,
+          "@contactId" : "$user.contactId"
+        }
+      }
+    }).should.eql({
+      "$user = /user/get-user-by-id": {
+        "fullUrl": 123,
+        "userId": 123,
+        "$contact = /contact/get-contact-by-id": {
+          "fullUrl": 123,
+          "@contactId" : "$user.contactId"
+        }
+      }
+    });
+  });
+
+  it("should preserve inner parameters", function () {
+    liferay.v61.prototype.mangleCamelCase({
+      "/some/path": {
+        "+fullURL": "java.util.Something",
+        "fullURL.fullURL": 123
+      }
+    }).should.eql({
+      "/some/path": {
+        "+fullUrl": "java.util.Something",
+        "fullUrl.fullURL": 123
+      }
+    });
+  });
 });
 
 describe("The global connector", function () {
