@@ -70,7 +70,7 @@ describe("The camelcase#normalize util", function () {
   });
 });
 
-describe("The camelcase#normalizeParameter util", function () {
+describe("The camelcase.normalizeParameter util", function () {
   it("should preserve inner parameters", function () {
     liferay.camelcase.normalizeParameter("fullURL.fullURL").should.eql("fullUrl.fullURL");
   });
