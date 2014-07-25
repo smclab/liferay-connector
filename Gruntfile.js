@@ -26,7 +26,8 @@ module.exports = function (grunt) {
           command: 'build',
           logLevel: 'info',
           projectDir: './test/fake-titanium-app',
-          platform: 'ios'
+          platform: 'ios',
+          iosVersion: grunt.option('ios-version')
         }
       },
       "droid": {
