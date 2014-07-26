@@ -78,7 +78,7 @@ describe("The camelcase.normalizeParameter util", function () {
 
 describe("The Connector#mangleCamelCase util", function () {
   it("should preserve nested service calls", function () {
-    liferay.v61.prototype.mangleCamelCase({
+    liferay.base.prototype.mangleCamelCase({
       "$user = /user/get-user-by-id": {
         "fullURL": 123,
         "userId": 123,
@@ -100,7 +100,7 @@ describe("The Connector#mangleCamelCase util", function () {
   });
 
   it("should preserve inner parameters", function () {
-    liferay.v61.prototype.mangleCamelCase({
+    liferay.base.prototype.mangleCamelCase({
       "/some/path": {
         "+fullURL": "java.util.Something",
         "fullURL.fullURL": 123
