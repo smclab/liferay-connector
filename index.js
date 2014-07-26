@@ -25,6 +25,7 @@ liferay.errors = require('./lib/errors');
 liferay.identify = require('./lib/identify');
 liferay.camelcase = require('./lib/camelcase');
 
+liferay.base = require('./lib/connectors/base');
 liferay.v61 = require('./lib/connectors/liferay61');
 liferay.v62 = require('./lib/connectors/liferay62');
 
