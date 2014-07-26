@@ -300,7 +300,7 @@ if (config.TEST_COMPANION_PLUGIN) describe("Smoke tests (companion)", function (
       }
     })
     .then(function (output) {
-      output.should.be.eql(false);
+      output.should.be.false;
     });
   });
 
@@ -311,7 +311,7 @@ if (config.TEST_COMPANION_PLUGIN) describe("Smoke tests (companion)", function (
       }
     })
     .then(function (output) {
-      output.should.be.eql(true);
+      output.should.be.true;
     });
   });
 });
@@ -352,7 +352,7 @@ if (config.TEST_COMPANION_PLUGIN) describe("Service Context (companion)", functi
       }
     })
     .then(function (ok) {
-      ok.should.be.eql(true);
+      ok.should.be.true;
     });
   });
 });
@@ -366,7 +366,7 @@ if (config.TEST_COMPANION_PLUGIN) describe("Parameter names (companion)", functi
       }
     })
     .then(function (ok) {
-      ok.should.be.eql(true);
+      ok.should.be.true;
     });
   });
 
@@ -378,7 +378,7 @@ if (config.TEST_COMPANION_PLUGIN) describe("Parameter names (companion)", functi
       }
     })
     .then(function (ok) {
-      ok.should.be.eql(true);
+      ok.should.be.true;
     });
   });
 });
