@@ -341,7 +341,7 @@ if (config.TEST_COMPANION_PLUGIN) describe("Return types (companion)", function 
 });
 
 if (config.TEST_COMPANION_PLUGIN) describe("Service Context (companion)", function () {
-  it("should support ServiceContext parameters", function () {
+  it("should support explicit ServiceContext parameters", function () {
     return connection.invoke({
       "/connector-companion-portlet/tests/service-context-smoke-test": {
         currentUrl: 'nonsense',
@@ -349,6 +349,38 @@ if (config.TEST_COMPANION_PLUGIN) describe("Service Context (companion)", functi
         '+serviceContext': 'com.liferay.portal.service.ServiceContext',
         'serviceContext.scopeGroupId': userGroup.groupId,
         'serviceContext.currentURL': 'nonsense'
+      }
+    })
+    .then(function (ok) {
+      ok.should.be.true;
+    });
+  });
+
+  it("should support implicit (with type) ServiceContext parameters", function () {
+    return connection.invoke({
+      "/connector-companion-portlet/tests/service-context-smoke-test": {
+        currentUrl: 'nonsense',
+        scopeGroupId: userGroup.groupId,
+        'serviceContext:com.liferay.portal.service.ServiceContext': {
+          scopeGroupId: userGroup.groupId,
+          currentURL: 'nonsense'
+        }
+      }
+    })
+    .then(function (ok) {
+      ok.should.be.true;
+    });
+  });
+
+  it("should support implicit ServiceContext parameters", function () {
+    return connection.invoke({
+      "/connector-companion-portlet/tests/service-context-smoke-test": {
+        currentUrl: 'nonsense',
+        scopeGroupId: userGroup.groupId,
+        serviceContext: {
+          scopeGroupId: userGroup.groupId,
+          currentURL: 'nonsense'
+        }
       }
     })
     .then(function (ok) {
