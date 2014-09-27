@@ -24,10 +24,10 @@ module.exports = function (grunt) {
       "ios": {
         options: {
           command: 'build',
-          logLevel: 'info',
+          logLevel: 'trace',
           projectDir: './test/fake-titanium-app',
           platform: 'ios',
-          iosVersion: grunt.option('ios-version')
+          iosVersion: '7.1'
         }
       },
       "droid": {
