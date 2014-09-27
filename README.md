@@ -5,6 +5,10 @@ Liferay Connector
     align="right" width="128" height="128"
     src="https://raw.githubusercontent.com/smclab/liferay-connector/master/logo.png">
 
+[![Dependencies](https://david-dm.org/smclab/liferay-connector/status.svg?style=flat-square)](https://david-dm.org/smclab/liferay-connector#info=dependencies)
+[![Dev Dependencies](https://david-dm.org/smclab/liferay-connector/dev-status.svg?style=flat-square)](https://david-dm.org/smclab/liferay-connector#info=devDependencies)
+[![Available on NPM](https://img.shields.io/npm/v/liferay-connector.svg?style=flat-square)](https://www.npmjs.org/package/liferay-connector)
+
 This module, available for Node.js and Titanium SDK, wraps the Liferay JSON WS into an easier to use (and easier to test!) API.
 
 Works and tested with **Liferay 6.2.x** and **6.1.x**, both CE and EE.
