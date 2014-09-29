@@ -83,9 +83,10 @@ module.exports = function (grunt) {
   grunt.registerTask('test:ios', [ 'unzip:module', 'setup-spec', 'titanium:ios' ]);
   grunt.registerTask('test:droid', [ 'unzip:module', 'setup-spec', 'titanium:droid' ]);
 
-  grunt.registerTask('ios', [ 'clean', 'build:titanium', 'test:ios' ]);
-  grunt.registerTask('droid', [ 'clean', 'build:titanium', 'test:droid' ]);
+  grunt.registerTask('ios', [ 'jshint:all', 'clean', 'build:titanium', 'test:ios' ]);
+  grunt.registerTask('droid', [ 'jshint:all', 'clean', 'build:titanium', 'test:droid' ]);
+  grunt.registerTask('node', [ 'jshint:all', 'test:node' ]);
 
-  grunt.registerTask('default', [ 'jshint:all', 'test:node' ]);
+  grunt.registerTask('default', [ 'node' ]);
 
 };
