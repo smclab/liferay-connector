@@ -1,4 +1,6 @@
 
+"use strict";
+
 // Move to titaniumifier!
 process.execPath || (process.execPath = '/path/to/node');
 
