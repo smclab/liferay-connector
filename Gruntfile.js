@@ -4,6 +4,13 @@ module.exports = function (grunt) {
 
     pkg: grunt.file.readJSON('package.json'),
 
+    jshint: {
+      options: {
+        jshintrc: true
+      },
+      all: [ 'Gruntfile.js', 'index.js', 'lib/**/*.js' ]
+    },
+
     mochaTest: {
       options: {
         reporter: 'spec'
@@ -51,9 +58,10 @@ module.exports = function (grunt) {
   });
 
   grunt.loadNpmTasks('grunt-contrib-clean');
-  grunt.loadNpmTasks('grunt-mocha-test')
-  grunt.loadNpmTasks('grunt-titanium')
-  grunt.loadNpmTasks('grunt-titaniumifier')
+  grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-mocha-test');
+  grunt.loadNpmTasks('grunt-titanium');
+  grunt.loadNpmTasks('grunt-titaniumifier');
   grunt.loadNpmTasks('grunt-zip');
 
   grunt.registerTask('test:node', [ 'mochaTest' ]);
@@ -78,6 +86,6 @@ module.exports = function (grunt) {
   grunt.registerTask('ios', [ 'clean', 'build:titanium', 'test:ios' ]);
   grunt.registerTask('droid', [ 'clean', 'build:titanium', 'test:droid' ]);
 
-  grunt.registerTask('default', [ 'test:node' ]);
+  grunt.registerTask('default', [ 'jshint:all', 'test:node' ]);
 
 };
