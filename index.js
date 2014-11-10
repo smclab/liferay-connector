@@ -18,10 +18,12 @@ global.clearTimeout = (function (clearTimeout) {
 })(global.clearTimeout);
 
 var Promise = require('bluebird');
+var request = require('./lib/request');
 
 var liferay = exports;
 
 liferay.Promise = Promise;
+liferay.request = request;
 
 liferay.errors = require('./lib/errors');
 liferay.identify = require('./lib/identify');
