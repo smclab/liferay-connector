@@ -35,6 +35,12 @@ liferay.connectors = [
   liferay.v61, liferay.v62
 ];
 
+liferay.guest = function (portalURL, auth, callback) {
+  return liferay.identify(portalURL, null).then(function (connector) {
+    return connector.guest(portalURL);
+  }).nodeify(callback);
+};
+
 liferay.authenticate = function (portalURL, auth, callback) {
   return liferay.identify(portalURL, auth).then(function (connector) {
     return connector.authenticate(portalURL, auth);
