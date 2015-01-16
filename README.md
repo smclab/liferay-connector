@@ -8,6 +8,7 @@ Liferay Connector
 [![Dependencies](https://david-dm.org/smclab/liferay-connector/status.svg?style=flat-square)](https://david-dm.org/smclab/liferay-connector#info=dependencies)
 [![Dev Dependencies](https://david-dm.org/smclab/liferay-connector/dev-status.svg?style=flat-square)](https://david-dm.org/smclab/liferay-connector#info=devDependencies)
 [![Available on NPM](https://img.shields.io/npm/v/liferay-connector.svg?style=flat-square)](https://www.npmjs.org/package/liferay-connector)
+[![Available on gitTio](https://img.shields.io/badge/available_on-gitTio-00B4CC.svg?style=flat-square)](http://gitt.io/component/liferay-connector)
 
 This module, available for Node.js and Titanium SDK, wraps the Liferay JSON WS into an easier to use (and easier to test!) API.
 
@@ -17,12 +18,17 @@ Works and tested with **Liferay 6.2.x** and **6.1.x**, both CE and EE.
 Installation
 ------------
 
-With **npm** you can easily install it with
+With **npm** for **Node.js** and **io.js** you can easily install it with
 
-    npm install --save liferay-connector
+    $ npm install --save liferay-connector
 
-If you’re working on a **Titanium SDK** project then head over the [releases page][rp] to download the latest packaged module.
+With **gitTio** for  **Titanium SDK** you can easily install it with
 
+    $ gittio install liferay-connector
+
+To download the module for [manual install][mi] (e.g. through *Appcelerator Studio*) then head over the [releases page][rp] to download the latest packaged module.
+
+[mi]: http://docs.appcelerator.com/titanium/latest/#!/guide/Using_a_Module
 [rp]: https://github.com/smclab/liferay-connector/releases
 
 
