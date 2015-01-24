@@ -1,8 +1,12 @@
 {
   "name": "liferay-connector",
-  "guid": "b74f4463-69a6-20ae-0ef0-3033a20889de",
   "version": "0.6.3",
   "description": "Liferay JSON WS wrapper for Node and Titanium SDK",
+  "titaniumManifest": {
+    "guid": "b74f4463-69a6-20ae-0ef0-3033a20889de",
+    "moduleid": "liferay-connector",
+    "name": "Liferay Connector"
+  },
   "author": {
     "name": "Pier Paolo Ramon",
     "email": "pierpaolo.ramon@smc.it",
@@ -14,7 +18,7 @@
     "url": "https://github.com/smclab/liferay-connector.git"
   },
   "engines": {
-    "titaniumsdk": ">= 3.3.0.GA",
+    "titaniumsdk": ">= 3.3.0",
     "node": ">= 0.8.0"
   },
   "main": "index.js",
@@ -36,7 +40,7 @@
     "grunt-contrib-jshint": "~0.10.0",
     "grunt-mocha-test": "~0.12.0",
     "grunt-titanium": "~0.2.2",
-    "grunt-titaniumifier": "~0.2.7",
+    "grunt-titaniumifier": "^1.0.0",
     "grunt-zip": "~0.16.0",
     "grunt": "~0.4.2",
     "should": "~4.0.4"
