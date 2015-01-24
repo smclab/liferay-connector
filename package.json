@@ -30,7 +30,7 @@
     "btoa": "~1.1.1",
     "mocha": "~1.21.4",
     "superagent": "~0.19.0",
-    "ti-superagent": "~0.6.0"
+    "ti-superagent": "~0.7.0"
   },
   "titanium": {
     "superagent": "ti-superagent"
