@@ -33,8 +33,7 @@ module.exports = function (grunt) {
           command: 'build',
           logLevel: 'trace',
           projectDir: './test/fake-titanium-app',
-          platform: 'ios',
-          iosVersion: '7.1'
+          platform: 'ios'
         }
       },
       "droid": {
