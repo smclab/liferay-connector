@@ -184,10 +184,10 @@ function testConnectionQuality(count) {
 // See: https://www.liferay.com/web/james.falkner/blog/-/blogs/diy-liferay-events-hacks-part-1
 // Test: https://www.liferay.com/api/jsonws/skinny-web.skinny/get-skinny-ddl-records?ddlRecordSetId=35246557
 
-describe("Guest connection", function () {
+xdescribe("Guest connection", function () {
   xit("should work with an uknown Liferay version");
 
-  it("should work with a known Liferay version", function () {
+  xit("should work with a known Liferay version", function () {
     this.timeout(4e3);
 
     return liferay.v61.guest('https://www.liferay.com').then(function (session) {
