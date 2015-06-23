@@ -232,7 +232,7 @@ describe("Error assimilation", function () {
   });
 });
 
-describe("Blogs services", function () {
+describe("Bookmarks services", function () {
   it("(with the user group)", function () {
     var candidates = connection.sites.filter(function (group) {
       return group.friendlyURL === '/' + connection.user.screenName;
@@ -251,45 +251,27 @@ describe("Blogs services", function () {
   it("should be able to create (valid) entries", function () {
     var now = new Date();
     return connection.invoke({
-      "/blogsentry/add-entry": {
-        title: 'title-' + Math.random(),
+      "/bookmarksentry/add-entry": {
+        groupId: userGroup.groupId,
+        folderId: 0,
+        name: 'name-' + Math.random(),
+        url: 'http://www.site.com',
         description: 'description-' + Math.random(),
-        content: 'content-' + Math.random(),
-        displayDateMonth: now.getMonth(),
-        displayDateDay: now.getDate(),
-        displayDateYear: now.getFullYear(),
-        displayDateHour: now.getHours(),
-        displayDateMinute: now.getMinutes(),
-        allowPingbacks: false,
-        allowTrackbacks: false,
-        trackbacks: [],
-        smallImage: false,
-        smallImageUrl: null,
-        // Issue #5
-        /*smallImageURL: null,*/
-        smallImageFileName: null,
-        smallImageInputStream: null,
-        '+serviceContext': 'com.liferay.portal.service.ServiceContext',
-        'serviceContext.companyId': userGroup.companyId,
-        'serviceContext.scopeGroupId': userGroup.groupId,
-        'serviceContext.addGuestPermissions': true,
-        'serviceContext.addGroupPermissions': true
-        // Issue #4
-        /*serviceContext: {
-          companyId: userGroup.groupId,
-          scopeGroupId: userGroup.companyId,
+        serviceContext: {
+          companyId: userGroup.companyId,
+          scopeGroupId: userGroup.groupId,
           addGuestPermissions: true,
           addGroupPermissions: true
-        }*/
+        }
       }
     })
     .then(function (result) {
       entry = result;
 
       entry.should.have.a.property('entryId');
-      entry.should.have.a.property('title');
+      entry.should.have.a.property('name');
+      entry.should.have.a.property('url');
       entry.should.have.a.property('description');
-      entry.should.have.a.property('content');
 
       entry.entryId.should.be.a.Number;
     });
@@ -297,7 +279,7 @@ describe("Blogs services", function () {
 
   it("should get that same entry", function () {
     return connection.invoke({
-      "/blogsentry/get-entry": {
+      "/bookmarksentry/get-entry": {
         entryId: entry.entryId
       }
     })
@@ -308,7 +290,7 @@ describe("Blogs services", function () {
 
   it("should delete a fresh entry", function () {
     return connection.invoke({
-      "/blogsentry/delete-entry": {
+      "/bookmarksentry/delete-entry": {
         entryId: entry.entryId
       }
     });
