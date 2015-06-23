@@ -224,7 +224,19 @@ describe("Error assimilation", function () {
       "/i-do-not-exists/neither-i": {}
     })
     .then(function () {
-      throw new Error("Resolved an non-existent service");
+      throw new Error("Resolved a non-existent service");
+    })
+    .catch(liferay.errors.BadRequest, function (err) {
+      return null;
+    });
+  });
+
+  it("should understand wrong contexts", function () {
+    return connection.invoke({
+      "/neverland-portlet.i-do-not-exists/neither-i": {}
+    })
+    .then(function () {
+      throw new Error("Resolved a non-existent context");
     })
     .catch(liferay.errors.BadRequest, function (err) {
       return null;
@@ -288,11 +300,36 @@ describe("Bookmarks services", function () {
     });
   });
 
+  it("should return a number of entries", function () {
+    return connection.invoke({
+      "/bookmarksentry/get-entries-count": {
+        groupId: userGroup.groupId,
+        folderId: 0
+      }
+    })
+    .then(function (result) {
+      result.should.be.greaterThan(0);
+    });
+  });
+
   it("should delete a fresh entry", function () {
     return connection.invoke({
       "/bookmarksentry/delete-entry": {
         entryId: entry.entryId
       }
+    })
+    .then(function () {
+      return connection.invoke({
+        "/bookmarksentry/get-entry": {
+          entryId: entry.entryId
+        }
+      })
+      .then(function (entry) {
+        throw new Error("Didn't deleted the entry with id: " + entry.entryId);
+      })
+      .catch(liferay.errors.NotFound, function () {
+        return null;
+      });
     });
   });
 });
