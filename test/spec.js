@@ -244,6 +244,19 @@ describe("Error assimilation", function () {
   });
 });
 
+describe("Document Library services", function () {
+  it("should be able to read boolean (false) values", function () {
+    return connection.invoke({
+      "/dlfolder/is-folder-locked": {
+        folderId: -1 // I want to be sure it returns `false`
+      }
+    })
+    .then(function (result) {
+      result.should.be.a.Boolean;
+    });
+  });
+});
+
 describe("Bookmarks services", function () {
   it("(with the user group)", function () {
     var candidates = connection.sites.filter(function (group) {
