@@ -1,6 +1,6 @@
 {
   "name": "liferay-connector",
-  "version": "0.8.2",
+  "version": "0.9.0",
   "description": "Liferay JSON WS wrapper for Node and Titanium SDK",
   "titaniumManifest": {
     "guid": "b74f4463-69a6-20ae-0ef0-3033a20889de",
