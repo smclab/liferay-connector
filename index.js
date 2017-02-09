@@ -19,9 +19,10 @@ liferay.camelcase = require('./lib/camelcase');
 liferay.base = require('./lib/connectors/base');
 liferay.v61 = require('./lib/connectors/liferay61');
 liferay.v62 = require('./lib/connectors/liferay62');
+liferay.v70 = require('./lib/connectors/liferay70');
 
 liferay.connectors = [
-  liferay.v61, liferay.v62
+  liferay.v61, liferay.v62, liferay.v70
 ];
 
 liferay.guest = function (portalURL, auth, callback) {

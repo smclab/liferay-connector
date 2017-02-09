@@ -12,7 +12,7 @@ Liferay Connector
 
 This module, available for Node.js and Titanium SDK, wraps the Liferay JSON WS into an easier to use (and easier to test!) API.
 
-Works and tested with **Liferay 6.2.x** and **6.1.x**, both CE and EE.
+Works and tested with **Liferay 7.0.x** and **6.2.x** and **6.1.x**, both CE and EE.
 
 
 Installation
